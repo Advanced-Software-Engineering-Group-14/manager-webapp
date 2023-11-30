@@ -36,7 +36,56 @@ export type Manager = {
     }
 }
 
+export type Driver = {
+    surname: string
+    othernames: string
+    email: string
+    password: string
+    phone: string
+    token: string | null
+    meta: {
+        isFirstLogin: boolean
+        isSuspended: boolean
+    }
+    verification: {
+        code: string
+        expiresAt: string
+    }
+    rating: number | 0
+    profileImageUrl: string | ""
+    gender: "MALE" | "FEMALE"
+}
+
+export type Homeowner = {
+    surname: string
+    othernames: string
+    email: string
+    password: string
+    phone: string
+    token: string | null
+    meta: {
+        isFirstLogin: boolean
+        isSuspended: boolean
+        isApproved: boolean
+    }
+    verification: {
+        code: string
+        expiresAt: string
+    }
+    rating: number | 0
+    profileImageUrl: string | ""
+    gender: "MALE" | "FEMALE"
+    residence: string
+    identification: {
+        idType: "VOTER" | "COUNTRY" | "DRIVER"
+        no: string
+        imageUrl: string
+    }
+}
+
 export type ManagerRes = Manager & MongoResponse
+export type DriverRes = Driver & MongoResponse
+export type HomeownerRes = Homeowner & MongoResponse
 
 
 export type ApiResponse<T> = AxiosResponse<{
