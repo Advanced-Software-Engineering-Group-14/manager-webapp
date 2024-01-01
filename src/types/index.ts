@@ -67,6 +67,7 @@ export type Homeowner = {
         isFirstLogin: boolean
         isSuspended: boolean
         isApproved: boolean
+        isVerified: boolean   
     }
     verification: {
         code: string

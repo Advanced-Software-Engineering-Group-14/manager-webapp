@@ -18,7 +18,7 @@ import { BsEye, BsEyeSlash } from "react-icons/bs"
 import { useState } from "react"
 import { LOGIN_USER, RESET_PASSWORD, SEND_VERIFICATION_CODE, VERIFY_CODE } from "@/src/utils/server/auth"
 import { useLocalStorage } from 'react-use';
-import { ForgotStoreType, ManagerRes } from '@/src/types';
+import { ForgotStoreType, } from '@/src/types';
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 
