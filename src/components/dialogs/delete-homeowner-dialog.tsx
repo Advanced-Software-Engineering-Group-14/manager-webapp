@@ -41,7 +41,7 @@ export default function DeleteHomeownerDialog({ homeowner }: Props) {
             toast.success("Deleted homeowner successfully")
         },
         onError: (error: any) => {
-            toast.error(error?.response?.data || "Couldn't delete homeowner. Try again later")
+            toast.error(error?.response?.data?.message || "Couldn't delete homeowner. Try again later")
         }
     })
 

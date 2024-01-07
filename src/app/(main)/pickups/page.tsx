@@ -1,28 +1,27 @@
 "use client"
 import UnderDevelopment from "@/src/components/core/under-development";
-import { driversColumns } from "@/src/components/table/columns";
+import { homeownerColumns, pickupColumns } from "@/src/components/table/columns";
 import { DataTable } from "@/src/components/table/data-table";
 import { Button } from "@/src/components/ui/button";
 import { useLocalStorage } from "react-use";
 import { ManagerRes } from '@/src/types';
 import { useQuery } from "@tanstack/react-query"
 import CustomLoader from "@/src/components/loaders/custom-loader";
-import { GET_ALL_DRIVERS } from "@/src/utils/server/driver";
+import { GET_ALL_PICKUPS } from "@/src/utils/server/pickup";
 import toast from "react-hot-toast"
 import CustomError from "@/src/components/core/custom-error";
-import AddDriverDialog from "@/src/components/dialogs/add-driver-dialog";
+import Link from "next/link";
+import AutoAssignPickupsDialog from "@/src/components/dialogs/auto-assign-pickups-dialog";
 
 
-
-
-export default function DriversPage() {
+export default function PickupsPage() {
     const [user, setUser] = useLocalStorage<ManagerRes | null>("user", null)
     const { isPending, isError, data, error, isSuccess } = useQuery({
-        queryKey: ['drivers'],
+        queryKey: ['pickups'],
         queryFn: async () => {
             if (user && user.token) {
-                const drivers = await GET_ALL_DRIVERS(user.token)
-                return drivers
+                const homeowners = await GET_ALL_PICKUPS(user.token)
+                return homeowners
             }
 
         },
@@ -34,7 +33,6 @@ export default function DriversPage() {
     if (isPending) {
         return (
             <section className="flex items-center justify-center w-full h-full">
-
                 <CustomLoader />
             </section>
                 
@@ -49,23 +47,27 @@ export default function DriversPage() {
         )
     }
 
-
     return (
         <section className="flex flex-col gap-4">
             <div className="flex justify-between items-center ">
                 <div className="">
                     <h1 className="font-semibold tracking-tighter text-4xl">
-                        Drivers
+                        Pickups
                     </h1>
                 </div>
-                <div className="">
-                   <AddDriverDialog />
+                <div className="space-x-4">
+                    <Link href="/pickups/overdue">
+                        <Button variant="secondary">
+                            View Overdue
+                        </Button>
+                    </Link>
+                   <AutoAssignPickupsDialog />
                 </div>
             </div>
             <>
                 {
                     (isError || data === undefined) ? <CustomError /> :
-                        <DataTable filterableCol="email" columns={driversColumns} data={data} title="drivers" />
+                        <DataTable filterableCol="status" columns={pickupColumns} data={data} title="pickups" />
                 }
             </>
         </section>

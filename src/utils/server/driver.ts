@@ -1,7 +1,7 @@
 import { ApiResponse, DriverRes } from "@/src/types"
 import Axios from "../axios"
 
-type CreateDriverInput = {
+export type CreateDriverInput = {
     surname: string
     othernames: string
     email: string
@@ -20,7 +20,7 @@ export const CREATE_DRIVER = async (info: CreateDriverInput, token: string) => {
             }
         })
 
-        if (response.status === 200) {
+        if (response.status === 200 || response.status === 201) {
             return response.data.data
         } else {
             throw new Error("oops")
