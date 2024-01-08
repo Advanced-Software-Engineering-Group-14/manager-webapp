@@ -9,6 +9,7 @@ export type MongoResponse = {
 
 export type UserRoles = "SUDO" | "ADMIN" | "DRIVER" | "HOMEOWNER"
 
+export type ManagerRoles = "SUDO" | "ADMIN"
 
 export type Action = {
     type: string;
