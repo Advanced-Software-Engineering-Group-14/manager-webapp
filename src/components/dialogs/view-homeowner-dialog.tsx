@@ -63,7 +63,7 @@ export default function ViewHomeownerDialog({ homeowner }: Props) {
                             Package Details
                         </p>
                     </div>
-                    <ViewItem label="Package Name" value={hmPackage.name} />
+                    <ViewItem label="Package Name" value={hmPackage?.name || "N/A"} />
                     <ViewItem label="Bin Number" value={_.toString(bins.length)} />
 
                     <div className="col-span-2 border-t">
